@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahmoud Hanafy - Portfolio</title>
+    <meta name="description" content="Mahmoud Hanafy -Software engineering student of ETU 'LETI'>
     
-
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Mahmoud Hanafy - Software engineering student of ETU 'LETI'">
+    <meta property="og:description" content="Software engineering student of ETU 'LETI'">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/125126600?s=400&u=61eda2a2454c521236dfc0baab5ac3d9266fc90d&v=4">
+    <meta property="og:url" content="https://...com">
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        :root {
+            --primary: #0f4191;
+            --primary-dark: #1D4ED8;
+            --secondary: #FB923C;
+            --dark: #111827;
+            --light: #F9FAFB;
+        }
         
         body {
             font-family: 'Inter', sans-serif;
@@ -16,49 +31,160 @@
             display: flex;
             flex-direction: column; 
             margin: 0;
-            background-color: #f7f7f7;
-            scroll-behavior: smooth; 
+            background-color: var(--dark);
+            scroll-behavior: smooth;
+            color: #374151;
         }
-        /* Custom styling for subtle separation between sections */
-        section:nth-child(even) {
-            background-color: #f7f7f7;
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
         }
-        section:nth-child(odd) {
-            background-color: #ffffff;
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-
-        /* Base style for nav links */
+        
         .nav-link {
+            position: relative;
             transition: color 0.3s ease;
         }
-
-        /* Active state for navigation links, controlled by JavaScript */
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
         .nav-link.active {
-            color: #FB923C; /* Tailwind orange-400 */
-            font-weight: 700; /* Bold */
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background-color: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, 15px); }
+            100% { transform: translate(0, -0px); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid var(--secondary);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--secondary); }
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.5) 50%, transparent 100%);
+            margin: 4rem 0;
         }
     </style>
 </head>
 <body>
-    
-    <!-- FIXED NAVIGATION BAR -->
-    <nav id="mainNav" class="fixed top-0 left-0 right-0 bg-black text-white p-4 md:p-6 z-50 shadow-xl">
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-sm text-white p-4 md:p-6 z-50 shadow-xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-             <!-- Logo (Top Left) -->
-            <a href="#hero" class="text-white hover:text-gray-400 transition duration-300">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 5L35 35M5 35L20 20L35 5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M15 5L20 5M25 5L35 5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <!-- Logo -->
+            <a href="#" class="text-white hover:text-gray-400 transition duration-300 flex items-center">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Letter M design -->
+            <path d="M8 30L15 15L22 25L29 10L36 30" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <span class="font-semibold text-lg">Home</span>
             </a>
 
             <!-- Navigation Links -->
-            <ul class="flex space-x-6 md:space-x-10 text-base md:text-lg font-medium">
-                <li><a href="#about" class="nav-link text-white hover:text-gray-400 transition duration-200">About me</a></li>
-                <li><a href="#stack" class="nav-link text-white hover:text-gray-400 transition duration-200">Stack</a></li>
+            <ul class="hidden md:flex space-x-6 md:space-x-10 text-base md:text-lg font-medium">
+                <li><a href="#about" class="nav-link text-white hover:text-gray-400 transition duration-200">About</a></li>
+                <li><a href="#experience" class="nav-link text-white hover:text-gray-400 transition duration-200">Experience</a></li>
+                <li><a href="#stack" class="nav-link text-white hover:text-gray-400 transition duration-200">Skills</a></li>
                 <li><a href="#projects" class="nav-link text-white hover:text-gray-400 transition duration-200">Projects</a></li>
                 <li>
-                    <a href="#contact" class="px-5 py-2 border-2 border-white text-white hover:bg-white hover:text-black rounded-full transition duration-300 ml-4">
+                    <a href="#contact" class="px-5 py-2 border-2 border-white text-white hover:bg-white hover:text-black rounded-full transition duration-300 ml-4 font-medium">
+                        CONTACT ME
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuButton" class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden bg-black/95 absolute top-full left-0 right-0 p-4 hidden">
+            <ul class="flex flex-col space-y-4 text-lg font-medium">
+                <li><a href="#about" class="nav-link text-white hover:text-gray-400 transition duration-200 block py-2">About</a></li>
+                <li><a href="#experience" class="nav-link text-white hover:text-gray-400 transition duration-200 block py-2">Experience</a></li>
+                <li><a href="#stack" class="nav-link text-white hover:text-gray-400 transition duration-200 block py-2">Skills</a></li>
+                <li><a href="#projects" class="nav-link text-white hover:text-gray-400 transition duration-200 block py-2">Projects</a></li>
+                <li><a href="#testimonials" class="nav-link text-white hover:text-gray-400 transition duration-200 block py-2">Testimonials</a></li>
+                <li>
+                    <a href="#contact" class="px-5 py-2 border-2 border-white text-white hover:bg-white hover:text-black rounded-full transition duration-300 font-medium block text-center mt-4">
                         CONTACT ME
                     </a>
                 </li>
@@ -66,99 +192,119 @@
         </div>
     </nav>
 
-    <!-- Main Content Wrapper (Adds top padding to prevent content being hidden by fixed nav) -->
-    <div class="pt-[80px] md:pt-[100px]"> 
+    <!-- Main Content Wrapper -->
+    <div class="pt-20"> 
         
-        <!-- HTML STRUCTURE SECTION (Body Content) -->
-        
-        <!-- Main Container (Hero Section) - Added ID for navigation -->
-        <div id="hero" class="w-full min-h-screen grid lg:grid-cols-2 grid-cols-1 overflow-hidden">
+        <!-- Hero Section -->
+        <div id="hero" class="w-full min-h-screen grid lg:grid-cols-2 grid-cols-1 overflow-hidden bg-gradient-to-br from-gray-900 to-black text-white">
 
-            <!-- LEFT SECTION: Light Gray Background (Information) -->
-            <div class="bg-gray-100 p-8 md:p-16 flex flex-col justify-between relative order-2 lg:order-1 h-full min-h-screen lg:min-h-0">
-                
-                <!-- Spacing fix when logo is absent -->
-                <div class="absolute top-8 left-8 md:top-10 md:left-12 opacity-0 w-10 h-10"></div>
-
-                <!-- Hero Text Content: Centered Vertically by flex-grow in the middle -->
-                <div class="flex-grow flex flex-col justify-center max-w-lg lg:ml-0 my-10">
-                    <p class="text-xl md:text-2xl text-gray-800 mb-2">Hi, I am</p>
-                    <h1 class="text-5xl md:text-7xl font-extrabold text-black mb-4 leading-tight">
-                        Mahmoud Hanafy
+            <!-- Left Section: Information -->
+            <div class="p-8 md:p-16 flex flex-col justify-center relative order-2 lg:order-1 h-full min-h-screen lg:min-h-0">
+                <!-- Hero Text Content -->
+                <div class="max-w-lg lg:ml-0">
+                    <p class="text-xl md:text-2xl text-gray-300 mb-2 fade-in">Hi, I am</p>
+                    <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight fade-in">
+                        Mahmoud <span class="text-gradient">Hanafy</span>
                     </h1>
-                    <h2 class="text-lg md:text-xl text-gray-600 font-semibold uppercase tracking-wider">
-                        Front-end Developer / UI Designer
-                    </h2>
-                </div>
-
-                <!-- Social Icons (Bottom Left) -->
-                <div class="flex space-x-4 mt-12 lg:mt-0 lg:absolute lg:bottom-10 lg:left-12">
-                    <!-- GitHub Icon -->
-                    <a href="#" aria-label="GitHub Profile" class="text-black hover:text-gray-600 transition duration-300 p-3 rounded-xl border border-black hover:border-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.44-.78-3.5h.03a3.8 3.8 0 0 0 .5-3.5v-.5c0-.98-.65-1.52-2-1.87a6.6 6.6 0 0 0-2 0c-1.42.35-2 1-2 1.87v.5a3.8 3.8 0 0 0 .5 3.5h.03c-.5.97-.85 2.15-.78 3.4a5.2 5.2 0 0 0-1 3.5v4"/><path d="M9 18a6.6 6.6 0 0 1-2-.5c-.8-.5-1.4-1.2-1.8-2-.4-.8-.6-1.7-.5-2.5a4.8 4.8 0 0 0-1-3.5c-.8-.8-1.2-1.7-1.3-2.7-.1-1-.4-2-.8-3-.4-1.4-1-2.4-2-2.8"/></svg>
-                    </a>
+                    <div class="typewriter text-lg md:text-xl text-gray-300 font-semibold uppercase tracking-wider mb-20">
+                Software engineering student of "LETI"
+                    </div>
+                    <p class="text-gray-400 mb-8 fade-in"></p>
                     
-                    <!-- Dribbble Icon (Placeholder for the 'TG' icon style) -->
-                    <a href="#" aria-label="Dribbble Profile" class="text-black hover:text-gray-600 transition duration-300 p-3 rounded-xl border border-black hover:border-gray-600">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dribbble"><circle cx="12" cy="12" r="10"/><path d="M11.5 5.2c4.2 1.7 8.3 4.8 8.5 9.4.2 2.7-.2 3.8-3.2 4.1-1.3.1-2.6-.5-3.8-1.4-.4-.3-.7-.6-.8-.8-.2-.3-.5-1.1-1.3-1.6-.4-.3-.7-.7-1.1-1.1-.9-.9-1.4-2.1-1.4-3.4 0-1.2.6-2.4 1.4-3.4.4-.4.7-.7 1.1-1.1.8-.5 1.1-1.3 1.3-1.6.4-.3.7-.6 1.1-.9.8-.5 1.5-1.1 2.3-1.5z"/></svg>
-                    </a>
-
-                    <!-- LinkedIn Icon -->
-                    <a href="#" aria-label="LinkedIn Profile" class="text-black hover:text-gray-600 transition duration-300 p-3 rounded-xl border border-black hover:border-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                    </a>
+                    <div class="flex flex-wrap gap-4 fade-in">
+                        <a href="#projects" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full hover:from-blue-600 hover:to-blue-700 transition duration-300 shadow-lg font-medium">
+                            Some of my projects
+                        </a>
+                        <a href="#contact" class="px-6 py-3 border-2 border-white text-white hover:bg-white hover:text-black rounded-full transition duration-300 font-medium">
+                            Get In Touch
+                        </a>
+                    </div>
                 </div>
 
+                <!-- Stats -->
+                <div class="flex flex-wrap gap-6 mt-12 fade-in">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white">3+</div>
+                        <div class="text-gray-400 text-sm">Years Experience</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white">30+</div>
+                        <div class="text-gray-400 text-sm">Projects Completed</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white">+</div>
+                        <div class="text-gray-400 text-sm">Happy Clients</div>
+                    </div>
+                </div>
             </div>
 
-            <!-- RIGHT SECTION: Black Background (Image) -->
-            <div class="bg-black text-white relative order-1 lg:order-2 flex flex-col min-h-screen lg:min-h-0">
-
-                <!-- Profile Image Area (Background Layer) -->
-                <div class="absolute inset-0">
-                     <!-- Placeholder for the large profile image -->
-                    <img 
-                        src="https://placehold.co/800x1200/222222/ffffff?text=Professional+Portrait" 
-                        alt="A professional portrait placeholder image for Mahmoud Hanafy"
-                        class="object-cover w-full h-full"
-                        onerror="this.onerror=null;this.src='https://placehold.co/800x1200/222222/ffffff?text=Image+Not+Available'"
-                    />
+            <!-- Right Section: Image -->
+            <div class="relative order-1 lg:order-2 flex flex-col min-h-screen lg:min-h-0 overflow-hidden">
+                <!-- Profile Image Area -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl floating">
+                        <img 
+                            src="https://avatars.githubusercontent.com/u/125126600?s=400&u=61eda2a2454c521236dfc0baab5ac3d9266fc90d&v=4" 
+                            alt="Mahmoud Hanafy - Front-end Developer and UI Designer"
+                            class="object-cover w-full h-full"
+                            onerror="this.onerror=null;this.src='https://placehold.co/800x800/222222/ffffff?text=Image+Not+Available'"
+                        />
+                    </div>
                 </div>
                 
-                <div class="absolute inset-0 z-10"></div>
-
+                <!-- Floating Elements -->
+                <div class="absolute top-20 left-10 w-6 h-6 rounded-full bg-blue-500/30 floating" style="animation-delay: 0.5s;"></div>
+                <div class="absolute bottom-40 right-20 w-10 h-10 rounded-full bg-orange-500/20 floating" style="animation-delay: 1s;"></div>
+                <div class="absolute top-1/3 right-1/4 w-8 h-8 rounded-full bg-blue-500/40 floating" style="animation-delay: 1.5s;"></div>
             </div>
         </div>
         
-        <!-- 1. ABOUT ME SECTION -->
+        <!-- About Me Section -->
         <section id="about" class="w-full bg-white text-gray-800 p-12 md:p-24 py-32">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-black mb-12 border-b-4 border-black inline-block pb-2">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-black mb-12 border-b-4 border-black inline-block pb-2 fade-in">
                     About Me
                 </h2>
                 
                 <!-- Content layout -->
                 <div class="grid md:grid-cols-2 gap-12 text-lg text-gray-700">
-                    <div>
-                        <p class="mb-6 leading-relaxed">Hello! My name is Mahmoud Hanafy, and I am a Front-end Developer and UI Designer with 5 years of experience crafting beautiful, functional, and user-centric web applications.</p>
+                    <div class="fade-in">
+                        <p class="mb-6 leading-relaxed">Hello! I'm Mahmoud Hanafy, a passionate software engineer  with 3 years of experience, functional, and user-centric web applications.</p>
                         <p class="mb-6 leading-relaxed">My passion lies at the intersection of design and code, ensuring that every project is not just aesthetically pleasing but also technically robust and highly performant. I specialize in modern JavaScript frameworks (like React and Angular) and robust utility-first CSS frameworks (like Tailwind).</p>
                         <p class="leading-relaxed">I thrive in collaborative environments where I can translate complex requirements into intuitive user experiences. When I'm not coding, you can find me exploring typography, mastering new design software, or enjoying a good book.</p>
                     </div>
-                    <div>
+                    <div class="fade-in">
                         <h3 class="text-2xl font-semibold text-black mb-4">Core Skills</h3>
-                        <ul class="list-disc list-inside space-y-2 pl-4">
-                            <li>HTML5 & Advanced CSS (Tailwind, SCSS)</li>
-                            <li>JavaScript (ES6+) & TypeScript</li>
-                            <li>React / Next.js Frameworks</li>
-                            <li>UI/UX Design & Prototyping (Figma)</li>
-                            <li>Responsive Web Design & Accessibility (WCAG)</li>
-                            <li>Git & CI/CD Pipelines</li>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                                HTML5 & Advanced CSS (Tailwind, SCSS)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                                JavaScript (ES6+) & TypeScript
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                                React / Next.js Frameworks
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                                UI/UX Design & Prototyping (Figma)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                                Responsive Web Design & Accessibility (WCAG)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                                Git & CI/CD Pipelines
+                            </li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="mt-20 text-center">
-                    <!-- Updated href to #projects -->
+                <div class="mt-20 text-center fade-in">
                     <a href="#projects" class="px-8 py-3 bg-black text-white hover:bg-gray-800 rounded-full transition duration-300 shadow-xl inline-flex items-center space-x-2">
                         <span>View My Projects</span> 
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
@@ -167,258 +313,469 @@
             </div>
         </section>
 
-        <!-- --- -->
-
-        <!--  STACK SECTION  -->
-<section id="stack" class="w-full text-gray-800 p-12 md:p-24 py-32 bg-gray-100">
-    <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-black mb-16 border-b-4 border-black inline-block pb-2">
-
-        <!-- Languages & Tools Section -->
-        <div class="mb-16">
-            <h3 class="text-3xl font-bold text-black mb-8 text-center">STACK</h3>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                
-                <!-- Frontend Column -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h4 class="text-xl font-semibold text-black mb-6 text-center border-b-2 border-gray-200 pb-2">Frontend</h4>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">HTML5</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">Tailwind</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" alt="JavaScript" alt="JavaScript" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">JavaScript</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/65dea6c4eaca7da319e552c09f4cf5a9a8dab2c8/icons/React-Dark.svg" alt="React" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">React</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Backend Column -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h4 class="text-xl font-semibold text-black mb-6 text-center border-b-2 border-gray-200 pb-2">Backend</h4>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">Python</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/NodeJS-Dark.svg" alt="Node.js" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">Node.js</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/DotNet.svg" alt=".NET" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">.Net</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/ExpressJS-Dark.svg" alt="Express.js" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">Express.js</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Database Column -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h4 class="text-xl font-semibold text-black mb-6 text-center border-b-2 border-gray-200 pb-2">Database</h4>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/PostgreSQL-Dark.svg" alt="PostgreSQL" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">PostgreSQL</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg" alt="MongoDB" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">MongoDB</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png" alt="SQL" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">SQL</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Redis_Logo.svg" alt="Redis" class="w-12 h-12 mb-2">
-                            <span class="text-sm font-medium">Redis</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tools Section -->
-        <div class="bg-white rounded-xl shadow-lg p-8">
-            <h3 class="text-2xl font-semibold text-black mb-8 text-center">Tools & DevOps</h3>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Git.svg" alt="Git" class="w-12 h-12 mb-2">
-                    <span class="text-sm font-medium text-center">Git</span>
-                </div>
-                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Github-Dark.svg" alt="Github" class="w-12 h-12 mb-2">
-                    <span class="text-sm font-medium text-center">Github</span>
-                </div>
-                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Docker.svg" alt="Docker" class="w-12 h-12 mb-2">
-                    <span class="text-sm font-medium text-center">Docker</span>
-                </div>
-                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Kubernetes.svg" alt="Kubernetes" class="w-12 h-12 mb-2">
-                    <span class="text-sm font-medium text-center">Kubernetes</span>
-                </div>
-                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Terraform-Dark.svg" alt="Terraform" class="w-12 h-12 mb-2">
-                    <span class="text-sm font-medium text-center">Terraform</span>
-                </div>
-                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/AWS-Dark.svg" alt="AWS" class="w-12 h-12 mb-2">
-                    <span class="text-sm font-medium text-center">AWS</span>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Programming Languages Section -->
-        <div class="mt-8 bg-white rounded-xl shadow-lg p-8">
-            <h3 class="text-2xl font-semibold text-black mb-8 text-center">Programming Languages</h3>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                                    <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg" alt="C" class="w-12 h-12 mb-2">
-                                <span class="text-sm font-medium">C</span>
-                                      </div>
-                  <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" alt="C++" class="w-12 h-12 mb-2">
-                    <span class="text-sm font-medium">C++</span>
-                </div>
-                 <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" class="w-12 h-12 mb-2">
-                    <span class="text-sm font-medium">Python</span>
-                </div>
-                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" alt="JavaScript" alt="JavaScript" class="w-12 h-12 mb-2">
-                    <span class="text-sm font-medium">JavaScript</span>
-                </div>
-                                <!-- <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="TypeScript" class="w-12 h-12 mb-2">
-                    <span class="text-sm font-medium">TypeScript</span>
-                </div> -->
-            </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-        <!-- --- -->
-
-        <!-- 3. PROJECTS SECTION (Formerly Portfolio) -->
-        <section id="projects" class="w-full text-gray-800 p-12 md:p-24 py-32 bg-white">
+        <!-- Experience Section -->
+        <section id="experience" class="w-full bg-gray-50 text-gray-800 p-12 md:p-24 py-32">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-black mb-12 border-b-4 border-black inline-block pb-2">
-                    Featured Projects
+                <h2 class="text-4xl md:text-5xl font-extrabold text-black mb-12 border-b-4 border-black inline-block pb-2 fade-in">
+                    Experience
+                </h2>
+                
+                <!-- Experience Timeline -->
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-blue-200"></div>
+                    
+                    <!-- Timeline items -->
+                    <div class="space-y-12">
+                        <!-- Experience 1 -->
+                        <div class="relative flex flex-col md:flex-row items-center fade-in">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                                <h3 class="text-xl font-bold text-black">Senior Frontend Developer</h3>
+                                <p class="text-blue-600 font-medium">Tech Solutions Inc.</p>
+                                <p class="text-gray-500">2021 - Present</p>
+                            </div>
+                            <div class="absolute left-0 md:left-1/2 transform -translate-x-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 z-10"></div>
+                            <div class="md:w-1/2 md:pl-12 mt-2 md:mt-0">
+                                <p class="text-gray-700">Leading frontend development for multiple client projects, implementing modern React applications with TypeScript, and mentoring junior developers.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience 2 -->
+                        <div class="relative flex flex-col md:flex-row items-center fade-in">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 order-2 md:order-1">
+                                <p class="text-gray-700">Developed responsive web applications using Angular and Vue.js, collaborated with UX designers to implement pixel-perfect interfaces, and optimized application performance.</p>
+                            </div>
+                            <div class="absolute left-0 md:left-1/2 transform -translate-x-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 z-10"></div>
+                            <div class="md:w-1/2 md:pl-12 mt-2 md:mt-0 order-1 md:order-2">
+                                <h3 class="text-xl font-bold text-black">Frontend Developer</h3>
+                                <p class="text-blue-600 font-medium">Digital Agency Co.</p>
+                                <p class="text-gray-500">2019 - 2021</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience 3 -->
+                        <div class="relative flex flex-col md:flex-row items-center fade-in">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                                <h3 class="text-xl font-bold text-black">UI/UX Designer & Developer</h3>
+                                <p class="text-blue-600 font-medium">Freelance</p>
+                                <p class="text-gray-500">2018 - 2019</p>
+                            </div>
+                            <div class="absolute left-0 md:left-1/2 transform -translate-x-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-blue-500 z-10"></div>
+                            <div class="md:w-1/2 md:pl-12 mt-2 md:mt-0">
+                                <p class="text-gray-700">Designed and developed websites for small businesses, created wireframes and prototypes, and implemented responsive designs with HTML, CSS, and JavaScript.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="stack" class="w-full text-gray-800 p-12 md:p-24 py-32 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-black mb-16 border-b-4 border-black inline-block pb-2 fade-in">
+                    Skills & Technologies
                 </h2>
 
+                <!-- Languages & Tools Section -->
+                <div class="mb-16 fade-in">
+                    <h3 class="text-3xl font-bold text-black mb-8 text-center">TECH STACK</h3>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        
+                        <!-- Frontend Column -->
+                        <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                            <h4 class="text-xl font-semibold text-black mb-6 text-center border-b-2 border-gray-200 pb-2">Frontend</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">HTML5</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">Tailwind</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" alt="JavaScript" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">JavaScript</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/65dea6c4eaca7da319e552c09f4cf5a9a8dab2c8/icons/React-Dark.svg" alt="React" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">React</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Backend Column -->
+                        <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                            <h4 class="text-xl font-semibold text-black mb-6 text-center border-b-2 border-gray-200 pb-2">Backend</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">Python</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/NodeJS-Dark.svg" alt="Node.js" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">Node.js</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/DotNet.svg" alt=".NET" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">.Net</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/ExpressJS-Dark.svg" alt="Express.js" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">Express.js</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Database Column -->
+                        <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                            <h4 class="text-xl font-semibold text-black mb-6 text-center border-b-2 border-gray-200 pb-2">Database</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/PostgreSQL-Dark.svg" alt="PostgreSQL" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">PostgreSQL</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg" alt="MongoDB" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">MongoDB</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png" alt="SQL" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">SQL</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Redis_Logo.svg" alt="Redis" class="w-12 h-12 mb-2">
+                                    <span class="text-sm font-medium">Redis</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Progress Bars -->
+                <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 mb-8 fade-in">
+                    <h3 class="text-2xl font-semibold text-black mb-8 text-center">Proficiency Levels</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">HTML/CSS</span>
+                                <span class="text-blue-600 font-medium">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress bg-blue-500" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">JavaScript</span>
+                                <span class="text-blue-600 font-medium">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress bg-blue-500" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">React</span>
+                                <span class="text-blue-600 font-medium">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress bg-blue-500" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">UI/UX Design</span>
+                                <span class="text-blue-600 font-medium">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress bg-blue-500" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools Section -->
+                <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 fade-in">
+                    <h3 class="text-2xl font-semibold text-black mb-8 text-center">Tools & DevOps</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                            <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Git.svg" alt="Git" class="w-12 h-12 mb-2">
+                            <span class="text-sm font-medium text-center">Git</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                            <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Github-Dark.svg" alt="Github" class="w-12 h-12 mb-2">
+                            <span class="text-sm font-medium text-center">Github</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                            <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Docker.svg" alt="Docker" class="w-12 h-12 mb-2">
+                            <span class="text-sm font-medium text-center">Docker</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                            <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Kubernetes.svg" alt="Kubernetes" class="w-12 h-12 mb-2">
+                            <span class="text-sm font-medium text-center">Kubernetes</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                            <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Terraform-Dark.svg" alt="Terraform" class="w-12 h-12 mb-2">
+                            <span class="text-sm font-medium text-center">Terraform</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                            <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/AWS-Dark.svg" alt="AWS" class="w-12 h-12 mb-2">
+                            <span class="text-sm font-medium text-center">AWS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="w-full text-gray-800 p-12 md:p-24 py-32 bg-gray-50">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-black mb-12 border-b-4 border-black inline-block pb-2 fade-in">
+                    Featured Projects
+                </h2>
+                
+                <!-- Project Filter -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                    <button class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-100 transition duration-300 filter-btn active" data-filter="all">All</button>
+                    <button class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-100 transition duration-300 filter-btn" data-filter="react">React</button>
+                    <button class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-100 transition duration-300 filter-btn" data-filter="angular">Angular</button>
+                    <button class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-100 transition duration-300 filter-btn" data-filter="vue">Vue</button>
+                    <button class="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-100 transition duration-300 filter-btn" data-filter="fullstack">Full Stack</button>
+                </div>
+
                 <!-- Project Grid -->
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     
                     <!-- Project Card 1 -->
-                    <div class="bg-gray-100 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
-                        <img src="https://placehold.co/600x400/3B82F6/ffffff?text=Project+1+Mockup" alt="Project 1 Mockup" class="w-full h-48 object-cover">
+                    <div class="project-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200" data-category="react">
+                        <div class="relative overflow-hidden">
+                            <img src="https://placehold.co/600x400/3B82F6/ffffff?text=E-commerce+Platform" alt="E-commerce Platform Mockup" class="w-full h-48 object-cover transition duration-500 hover:scale-105">
+                            <div class="absolute top-4 right-4">
+                                <span class="text-xs font-medium text-blue-600 bg-blue-100 px-3 py-1 rounded-full">React/Tailwind</span>
+                            </div>
+                        </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">E-commerce Platform Redesign</h3>
-                            <p class="text-gray-600 text-sm mb-4">Built with React, Redux, and Tailwind CSS. Focus on mobile-first shopping experience.</p>
+                            <p class="text-gray-600 text-sm mb-4">Built with React, Redux, and Tailwind CSS. Focus on mobile-first shopping experience with optimized performance.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-xs font-medium text-blue-600 bg-blue-100 px-3 py-1 rounded-full">React/Tailwind</span>
-                                <a href="#" class="text-black hover:text-blue-600 font-semibold text-sm">View Demo &rarr;</a>
+                                <div class="flex space-x-2">
+                                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">React</span>
+                                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">Redux</span>
+                                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">Tailwind</span>
+                                </div>
+                                <a href="#" class="text-black hover:text-blue-600 font-semibold text-sm flex items-center">
+                                    View Demo <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project Card 2 -->
-                    <div class="bg-gray-100 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
-                        <img src="https://placehold.co/600x400/4CAF50/ffffff?text=Project+2+Mockup" alt="Project 2 Mockup" class="w-full h-48 object-cover">
+                    <div class="project-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200" data-category="angular">
+                        <div class="relative overflow-hidden">
+                            <img src="https://placehold.co/600x400/4CAF50/ffffff?text=Data+Dashboard" alt="Data Visualization Dashboard Mockup" class="w-full h-48 object-cover transition duration-500 hover:scale-105">
+                            <div class="absolute top-4 right-4">
+                                <span class="text-xs font-medium text-green-600 bg-green-100 px-3 py-1 rounded-full">Angular/D3.js</span>
+                            </div>
+                        </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Data Visualization Dashboard</h3>
-                            <p class="text-gray-600 text-sm mb-4">An Angular application using D3.js for real-time chart rendering and data analysis.</p>
+                            <p class="text-gray-600 text-sm mb-4">An Angular application using D3.js for real-time chart rendering and data analysis with interactive components.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-xs font-medium text-green-600 bg-green-100 px-3 py-1 rounded-full">Angular/D3.js</span>
-                                <a href="#" class="text-black hover:text-green-600 font-semibold text-sm">View Demo &rarr;</a>
+                                <div class="flex space-x-2">
+                                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">Angular</span>
+                                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">D3.js</span>
+                                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">TypeScript</span>
+                                </div>
+                                <a href="#" class="text-black hover:text-green-600 font-semibold text-sm flex items-center">
+                                    View Demo <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project Card 3 -->
-                    <div class="bg-gray-100 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
-                        <img src="https://placehold.co/600x400/FF5722/ffffff?text=Project+3+Mockup" alt="Project 3 Mockup" class="w-full h-48 object-cover">
+                    <div class="project-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200" data-category="fullstack">
+                        <div class="relative overflow-hidden">
+                            <img src="https://placehold.co/600x400/FF5722/ffffff?text=Blog+Engine" alt="Mobile-First Blog Engine Mockup" class="w-full h-48 object-cover transition duration-500 hover:scale-105">
+                            <div class="absolute top-4 right-4">
+                                <span class="text-xs font-medium text-red-600 bg-red-100 px-3 py-1 rounded-full">Next.js/UI/UX</span>
+                            </div>
+                        </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Mobile-First Blog Engine</h3>
-                            <p class="text-gray-600 text-sm mb-4">A static site generator based project optimized for speed and SEO (Next.js/HTML).</p>
+                            <p class="text-gray-600 text-sm mb-4">A static site generator based project optimized for speed and SEO with custom CMS and responsive design.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-xs font-medium text-red-600 bg-red-100 px-3 py-1 rounded-full">Next.js/UI/UX</span>
-                                <a href="#" class="text-black hover:text-red-600 font-semibold text-sm">View Demo &rarr;</a>
+                                <div class="flex space-x-2">
+                                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">Next.js</span>
+                                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">Node.js</span>
+                                    <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">MongoDB</span>
+                                </div>
+                                <a href="#" class="text-black hover:text-red-600 font-semibold text-sm flex items-center">
+                                    View Demo <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-            </div>
-        </section>
-
-        <!-- --- -->
-
-        <!-- 4. CONTACT ME SECTION -->
-        <section id="contact" class="w-full text-white p-12 md:p-24 py-32 bg-black">
-            <div class="max-w-xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
-                    Get In Touch
-                </h2>
-                <p class="text-lg text-gray-400 mb-12">
-                    I'm currently available for freelance opportunities or full-time roles. Let's build something great together.
-                </p>
-
-                <!-- Status Message Box (Replaces alert() - hidden by default) -->
-                <div id="statusMessage" class="hidden p-4 mb-6 rounded-xl text-sm font-medium"></div>
-
-                <!-- Contact Form -->
-                <form id="contactForm" class="space-y-6">
-                    <div>
-                        <input type="text" id="name" placeholder="Your Name" required
-                            class="w-full p-4 bg-gray-900 border border-gray-700 text-white rounded-lg focus:ring-white focus:border-white transition duration-300" />
-                    </div>
-                    <div>
-                        <input type="email" id="email" placeholder="Your Email" required
-                            class="w-full p-4 bg-gray-900 border border-gray-700 text-white rounded-lg focus:ring-white focus:border-white transition duration-300" />
-                    </div>
-                    <div>
-                        <textarea id="message" placeholder="Your Message" rows="5" required
-                            class="w-full p-4 bg-gray-900 border border-gray-700 text-white rounded-lg focus:ring-white focus:border-white transition duration-300"></textarea>
-                    </div>
-                    <div>
-                        <button type="submit" 
-                            class="w-full px-6 py-4 bg-white text-black font-bold text-lg rounded-full hover:bg-gray-200 transition duration-300 shadow-xl">
-                            SEND MESSAGE
-                        </button>
-                    </div>
-                </form>
-                
-                <!-- Footer/Credits -->
-                <div class="mt-20 text-sm text-gray-500">
-                    <p>&copy; 2025 Mahmoud Hanafy. All rights reserved.</p>
+                <div class="text-center mt-12 fade-in">
+                    <a href="#" class="px-6 py-3 border-2 border-black text-black hover:bg-black hover:text-white rounded-full transition duration-300 font-medium inline-flex items-center">
+                        <span>View All Projects</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
             </div>
         </section>
 
-    </div><!-- End of main content wrapper -->
+        <!-- Testimonials Section -->
+        <!-- <section id="testimonials" class="w-full bg-white text-gray-800 p-12 md:p-24 py-32">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-black mb-12 border-b-4 border-black inline-block pb-2 fade-in">
+                    Testimonials
+                </h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"> -->
+                    <!-- Testimonial 1 -->
+                    <!-- <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 fade-in">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold mr-4">
+                                JD
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-black">John Doe</h4>
+                                <p class="text-sm text-gray-600">CTO, Tech Solutions Inc.</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Mahmoud delivered exceptional work on our e-commerce platform. His attention to detail and technical expertise resulted in a 40% improvement in page load times."</p>
+                        <div class="flex text-yellow-400 mt-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                     -->
+                    <!-- Testimonial 2 -->
+                    <!-- <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 fade-in">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold mr-4">
+                                SJ
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-black">Sarah Johnson</h4>
+                                <p class="text-sm text-gray-600">Product Manager, Digital Agency Co.</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Working with Mahmoud was a pleasure. He consistently delivered high-quality code and provided valuable insights that improved our product's user experience."</p>
+                        <div class="flex text-yellow-400 mt-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Testimonial 3 -->
+                    <!-- <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 fade-in">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold mr-4">
+                                MR
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-black">Michael Roberts</h4>
+                                <p class="text-sm text-gray-600">CEO, Startup Ventures</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Mahmoud's ability to understand complex requirements and translate them into elegant solutions is impressive. He's a true asset to any development team."</p>
+                        <div class="flex text-yellow-400 mt-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
 
-    <!-- JAVASCRIPT SECTION (Script Logic) -->
+        <!-- Contact Section -->
+        <section id="contact" class="w-full text-gray-600 p-12 md:p-24 py-32 bg-black">
+            <div class="max-w-xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-white fade-in">
+                    Get In Touch
+                </h2>
+                <p class="text-gray-400 mb-12 text-lg fade-in">----------------------------------------</p>
+
+                <!-- Contact Info -->
+               <div class="grid md:grid-cols-2 gap-8 mb-12 fade-in">
+    <div class="bg-gray-800 rounded-lg p-6">
+        <i class="fas fa-building text-blue-500 text-2xl mb-4"></i>
+        <h3 class="text-white font-semibold mb-2">Current company</h3>
+                        <a href="7waysconsult" class="text-gray-300 hover:text-white transition duration-300">7waysconsult</a>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-6">
+                        <i class="fas fa-map-marker-alt text-blue-500 text-2xl mb-4"></i>
+                        <h3 class="text-white font-semibold mb-2">Location</h3>
+                        <p class="text-gray-300">Saint Petersburg, Russia</p>
+                    </div>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex justify-center space-x-8 mb-12 fade-in">
+                    <!-- GitHub Icon -->
+                    <a href="https://github.com/saicooo" aria-label="GitHub Profile" target="_blank" class="transform hover:scale-110 transition duration-300">
+                        <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Github-Dark.svg" alt="Github" class="w-16 h-16">
+                    </a>
+                    
+                    <!-- Telegram Icon -->
+                    <a href="https://t.me/saicoooooooo" aria-label="Telegram" target="_blank" class="transform hover:scale-110 transition duration-300">
+                        <img src="https://cdn-icons-png.flaticon.com/128/1599/1599019.png" alt="Telegram" class="w-16 h-16">
+                    </a>
+                    
+                    <!-- Gmail Icon -->
+                    <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=ma.hanafy3424@gmail.com" aria-label="Gmail" class="transform hover:scale-110 transition duration-300">
+                        <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Gmail-Dark.svg" alt="Gmail" class="w-16 h-16">
+                    </a>
+                </div>
+
+
+                <!-- Copyright -->
+                <div class="mt-20 text-sm text-gray-500 fade-in">
+                    <p>&copy; 2025 Mahmoud Hanafy. All rights reserved.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                
+                // Close mobile menu when clicking on a link
+                document.querySelectorAll('#mobileMenu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+            
             // --- Smooth Scrolling Logic ---
-            const headerHeight = 80; // Approximate height of the fixed header (must match rootMargin offset)
+            const headerHeight = 80;
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -429,7 +786,6 @@
                         const targetElement = document.querySelector(href);
 
                         if (targetElement) {
-                            // Calculate the position considering the fixed header height
                             const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
 
                             window.scrollTo({
@@ -441,7 +797,7 @@
                 });
             });
 
-            // --- Contact Form Mailto Logic ---
+            // --- Contact Form Logic ---
             const contactForm = document.getElementById('contactForm');
             const statusMessage = document.getElementById('statusMessage');
             const recipientEmail = "ma.hanafy3424@gmail.com";
@@ -482,25 +838,40 @@
                 });
             }
 
+            // --- Project Filtering ---
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    projectCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
 
-            // --- Active Nav Link Highlighting (IntersectionObserver) ---
+            // --- Active Nav Link Highlighting ---
             const sections = document.querySelectorAll('#hero, section[id]'); 
             const navLinks = document.querySelectorAll('.nav-link');
 
-            // FIX: Using a large negative bottom margin to create a thin detection band 
-            // right below the header. This prevents multiple elements from intersecting 
-            // at once and correctly switches on short sections.
             const observerOptions = {
                 root: null,
-                // Top: -80px (Trigger when section top hits the bottom of the header)
-                // Bottom: -99.9% (Stop intersecting almost immediately once the section scrolls past the trigger)
                 rootMargin: `-${headerHeight}px 0px -99.9% 0px`, 
                 threshold: 0
             };
             
-            // Utility function to set/reset link styles using Tailwind classes
             const setActiveStyle = (link, isActive) => {
-                // For the purpose of highlighting, we override Tailwind classes directly on the link element
                 if (isActive) {
                     link.classList.add('active'); 
                 } else {
@@ -509,27 +880,23 @@
             }
 
             const observer = new IntersectionObserver((entries) => {
-                let currentActiveId = 'about'; // Default to 'about'
+                let currentActiveId = 'about';
                 let foundActive = false;
 
-                // Loop through entries to find the one currently intersecting
                 for (let i = 0; i < entries.length; i++) {
                     const entry = entries[i];
                     
                     if (entry.isIntersecting) {
-                        // The entry currently intersecting the small -80px band is the active section
                         currentActiveId = entry.target.id === 'hero' ? 'about' : entry.target.id;
                         foundActive = true;
-                        break; // Stop once the current active one is found
+                        break;
                     }
                 }
                 
-                // If we are at the very top of the page (before the first section intersects)
                 if (!foundActive && window.scrollY < headerHeight) {
                     currentActiveId = 'about'; 
                 }
                 
-                // Update navigation links based on the determined active ID
                 navLinks.forEach(link => {
                     const linkId = link.getAttribute('href').substring(1);
                     const isActive = linkId === currentActiveId;
@@ -539,9 +906,42 @@
 
             }, observerOptions);
 
-            // Observe all sections
             sections.forEach(section => {
                 observer.observe(section);
+            });
+            
+            // --- Fade In Animation on Scroll ---
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+            
+            // --- Animate Skill Bars on Scroll ---
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            const skillObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const width = entry.target.style.width;
+                        entry.target.style.width = '0%';
+                        setTimeout(() => {
+                            entry.target.style.width = width;
+                        }, 300);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillBars.forEach(bar => {
+                skillObserver.observe(bar);
             });
         });
     </script>
